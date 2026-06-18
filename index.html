@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basketball Scoreboard</title>
+
+<style>
+body{
+    background:#000;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.team{
+    display:inline-block;
+    width:40%;
+}
+
+.score{
+    font-size:120px;
+    font-weight:bold;
+}
+</style>
+
+<script>
+function updateScoreboard(){
+    let scores = JSON.parse(localStorage.getItem("scores"));
+
+    if(scores){
+        document.getElementById("homeScore").innerText = scores.home;
+        document.getElementById("awayScore").innerText = scores.away;
+    }
+}
+
+setInterval(updateScoreboard,1000);
+</script>
+
+</head>
+
+<body onload="updateScoreboard()">
+
+<h1>Basketball Scoreboard</h1>
+
+<div class="team">
+<h2>HOME</h2>
+<div id="homeScore" class="score">0</div>
+</div>
+
+<div class="team">
+<h2>AWAY</h2>
+<div id="awayScore" class="score">0</div>
+</div>
+
+</body>
+</html>
