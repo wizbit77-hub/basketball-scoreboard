@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Admin Panel</title>
+
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+}
+
+button{
+    width:200px;
+    height:80px;
+    font-size:30px;
+    margin:10px;
+}
+</style>
+
+<script>
+
+let pin = prompt("Enter PIN");
+
+if(pin !== "1234"){
+    alert("Incorrect PIN");
+    window.location = "index.html";
+}
+
+let scores = {
+    home:0,
+    away:0
+};
+
+function saveScores(){
+    localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+function home1(){
+    scores.home++;
+    saveScores();
+    updateDisplay();
+}
+
+function away1(){
+    scores.away++;
+    saveScores();
+    updateDisplay();
+}
+
+function resetScores(){
+    scores.home=0;
+    scores.away=0;
+    saveScores();
+    updateDisplay();
+}
+
+function updateDisplay(){
+    document.getElementById("home").innerText=scores.home;
+    document.getElementById("away").innerText=scores.away;
+}
+
+window.onload=function(){
+
+let stored=localStorage.getItem("scores");
+
+if(stored){
+    scores=JSON.parse(stored);
+}
+
+updateDisplay();
+}
+</script>
+
+</head>
+
+<body>
+
+<h1>Score Control</h1>
+
+<h2>Home: <span id="home">0</span></h2>
+
+<button onclick="home1()">+1 Home</button>
+
+<br><br>
+
+<h2>Away: <span id="away">0</span></h2>
+
+<button onclick="away1()">+1 Away</button>
+
+<br><br>
+
+<button onclick="resetScores()">Reset</button>
+
+</body>
+
+</html>
